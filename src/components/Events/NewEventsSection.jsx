@@ -5,7 +5,7 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 import EventItem from "./EventItem.jsx";
 import { fetchEvents } from "../../util/http.js";
 
-export default function NewEventsSection() {
+export default function NewEventsSection({ type }) {
   // const [data, setData] = useState();
   // const [error, setError] = useState();
   // const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +59,10 @@ export default function NewEventsSection() {
 
   const { data, isPending, isError, error } = useQuery({
     //Understanding one by one data is data that is recived by our funtion that is queryFn : fetchEvents , isPending return boolean of that if data isPending or not ,  isError proivdes boolean of in fetching error is ouccur ot not (this only works if our fetchFunction throws error (you can check fetchEvents it is indeed handle errors) , error proivdes error that is ouccur in fetching fucntion  )
-    queryKey: ["events", { max: 3 }], //Now this queryKey is very important that is because queryKey stores cache data as it can be use by other components to render it (note that is is also one of the main function of tanstack) , so to use this data again from cache it should have key to identifie that data so queryKey is that key , this key can be multiple items in array but it shold be array
+    queryKey: [
+      type === "recent" ? "events" : "allEvents",
+      { max: type === "recent" ? 3 : undefined },
+    ], //Now this queryKey is very important that is because queryKey stores cache data as it can be use by other components to render it (note that is is also one of the main function of tanstack) , so to use this data again from cache it should have key to identifie that data so queryKey is that key , this key can be multiple items in array but it shold be array
     queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }), //As mention above this is a function that fetch the data from server or we can say that does the first step of fetching data
     // React Query passes a object in above (fetchEvents) function as it is called like this! to see that simply log the obj in function GoTo http.js
 
@@ -103,7 +106,11 @@ export default function NewEventsSection() {
   return (
     <section className="content-section" id="new-events-section">
       <header>
-        <h2>Recently added events</h2>
+        {type === "recent" ? (
+          <h2>Recently added events</h2>
+        ) : (
+          <h2>All Events</h2>
+        )}
       </header>
       {content}
     </section>

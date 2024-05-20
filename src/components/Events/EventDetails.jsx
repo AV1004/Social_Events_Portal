@@ -69,7 +69,7 @@ export default function EventDetails() {
 
   const handleDelete = () => {
     mutate({ id });
-    navigate("../");
+    navigate("/");
   };
 
   if (event) {
