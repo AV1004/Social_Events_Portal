@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+import fs from "fs";
 
 import bodyParser from "body-parser";
 import express from "express";
@@ -28,7 +28,7 @@ app.get("/", async (req, res) => {
 
 app.get("/events", async (req, res) => {
   const { max, search } = req.query;
-  const eventsFileContent = await fs.readFile(
+  const eventsFileContent = await fs.readFileSync(
     (process.cwd() + "/events.json").split("/var/task/")[1]
   );
   let events = JSON.parse(eventsFileContent);
