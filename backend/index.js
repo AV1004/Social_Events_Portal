@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 
 import bodyParser from "body-parser";
 import express from "express";
+import path from "path";
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.get("/", async (req, res) => {
 app.get("/events", async (req, res) => {
   const { max, search } = req.query;
   const eventsFileContent = await fs.readFile(
-    process.cwd + "./data/events.json"
+    path.join(process.cwd() + "events.json")
   );
   let events = JSON.parse(eventsFileContent);
 
@@ -56,7 +57,7 @@ app.get("/events", async (req, res) => {
 
 app.get("/events/images", async (req, res) => {
   const imagesFileContent = await fs.readFile(
-    process.cwd + "./data/images.json"
+    path.join(process.cwd() + "images.json")
   );
   const images = JSON.parse(imagesFileContent);
 
@@ -67,7 +68,7 @@ app.get("/events/:id", async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile(
-    process.cwd + "./data/events.json"
+    path.join(process.cwd() + "events.json")
   );
   const events = JSON.parse(eventsFileContent);
 
@@ -106,7 +107,7 @@ app.post("/events", async (req, res) => {
   }
 
   const eventsFileContent = await fs.readFile(
-    process.cwd + "./data/events.json"
+    path.join(process.cwd() + "events.json")
   );
   const events = JSON.parse(eventsFileContent);
 
@@ -118,7 +119,7 @@ app.post("/events", async (req, res) => {
   events.push(newEvent);
 
   await fs.writeFile(
-    process.cwd + "./data/events.json",
+    path.join(process.cwd() + "events.json"),
     JSON.stringify(events)
   );
 
@@ -145,7 +146,7 @@ app.put("/events/:id", async (req, res) => {
   }
 
   const eventsFileContent = await fs.readFile(
-    process.cwd + "./data/events.json"
+    path.join(process.cwd() + "events.json")
   );
   const events = JSON.parse(eventsFileContent);
 
@@ -161,7 +162,7 @@ app.put("/events/:id", async (req, res) => {
   };
 
   await fs.writeFile(
-    process.cwd + "./data/events.json",
+    path.join(process.cwd() + "events.json"),
     JSON.stringify(events)
   );
 
@@ -174,7 +175,7 @@ app.delete("/events/:id", async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile(
-    process.cwd + "./data/events.json"
+    path.join(process.cwd() + "events.json")
   );
   const events = JSON.parse(eventsFileContent);
 
@@ -187,7 +188,7 @@ app.delete("/events/:id", async (req, res) => {
   events.splice(eventIndex, 1);
 
   await fs.writeFile(
-    process.cwd + "./data/events.json",
+    path.join(process.cwd() + "events.json"),
     JSON.stringify(events)
   );
 
