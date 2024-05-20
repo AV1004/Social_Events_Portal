@@ -21,6 +21,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", async (req, res) => {
+  res.send("Hello from Social Events Portal's API");
+});
+
 app.get("/events", async (req, res) => {
   const { max, search } = req.query;
   const eventsFileContent = await fs.readFile("./data/events.json");
