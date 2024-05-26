@@ -32,7 +32,7 @@ export default function EventDetails() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["events", id],
-        refetchType: "none", //Use this to not send "events again here"
+        // refetchType: "none", //Use this to not send "events again here"
       });
     },
   });

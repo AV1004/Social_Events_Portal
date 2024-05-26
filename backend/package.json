@@ -5,13 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "Maximilian Schwarzmüller (Academind GmbH)",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "express": "^4.18.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "mongoose": "^8.4.0",
+    "nodemon": "^3.1.1"
   }
 }
