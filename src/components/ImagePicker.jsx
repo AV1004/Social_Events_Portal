@@ -10,7 +10,7 @@ export default function ImagePicker({ images, selectedImage, onSelect }) {
             className={selectedImage === image.path ? "selected" : undefined}
           >
             <img
-              src={`http://localhost:3000/${image.path}`}
+              src={`https://social-events-portal-api.vercel.app/images/${image.path}`}
               alt={image.caption}
             />
           </li>
