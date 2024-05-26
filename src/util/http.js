@@ -6,7 +6,7 @@ export async function fetchEvents({ signal, searchTerm, max }) {
   // export async function fetchEvents(searchTerm) {
   // console.log(searchTerm);  //This object gets many data one of that is signal and the signal is use to Abort Request if user go out to page before request completly not sended!
 
-  let url = "http://localhost:3000/events";
+  let url = "https://social-events-portal-api.vercel.app/events";
 
   if (searchTerm && max) {
     url += "?search=" + searchTerm + "max=" + max;
@@ -32,13 +32,16 @@ export async function fetchEvents({ signal, searchTerm, max }) {
 
 export async function createNewEvent(eventData) {
   console.log(eventData);
-  const response = await fetch(`http://localhost:3000/events`, {
-    method: "POST",
-    body: JSON.stringify(eventData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `https://social-events-portal-api.vercel.app/events`,
+    {
+      method: "POST",
+      body: JSON.stringify(eventData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while creating the event");
@@ -53,9 +56,12 @@ export async function createNewEvent(eventData) {
 }
 
 export async function getImages({ signal }) {
-  const response = await fetch("http://localhost:3000/events/images", {
-    signal,
-  });
+  const response = await fetch(
+    "https://social-events-portal-api.vercel.app/events/images",
+    {
+      signal,
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error ouccred while fetching of images");
@@ -70,9 +76,12 @@ export async function getImages({ signal }) {
 }
 
 export async function getEventDetail({ id, signal }) {
-  const response = await fetch(`http://localhost:3000/events/` + id, {
-    signal,
-  });
+  const response = await fetch(
+    `https://social-events-portal-api.vercel.app/events/` + id,
+    {
+      signal,
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error ouccred while fetching of event Details");
@@ -87,9 +96,12 @@ export async function getEventDetail({ id, signal }) {
 }
 
 export async function deleteEvent({ id }) {
-  const response = await fetch("http://localhost:3000/events/" + id, {
-    method: "DELETE",
-  });
+  const response = await fetch(
+    "https://social-events-portal-api.vercel.app/events/" + id,
+    {
+      method: "DELETE",
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error ouccred while deleting of an event");
@@ -103,13 +115,16 @@ export async function deleteEvent({ id }) {
   return message;
 }
 export async function updateEvent({ event, id }) {
-  const response = await fetch(`http://localhost:3000/events/${id}`, {
-    method: "PUT",
-    body: JSON.stringify({ event }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `https://social-events-portal-api.vercel.app/events/${id}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ event }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error ouccred while updation of an event");
